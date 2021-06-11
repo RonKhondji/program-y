@@ -32,7 +32,17 @@ class Tokenizer:
         if not words:
             return ''
         to_join = [word.strip() for word in words if word]
-        return self.split_chars.join(to_join)
+        NSC = ['.', ',', '!', '?', '-']
+        SAC = ['.', ',', '!', '?']
+        for i in range(len(to_join)-1):
+            if to_join[i][-1] != '(' and to_join[i][-1] not in NSC and to_join[i+1][0] not in NSC:
+                to_join[i] = to_join[i] + ' '
+            elif to_join[i][-1] in SAC and (to_join[i+1][0].isalpha() or to_join[i+1][0] == '('):
+                to_join[i] = to_join[i] + ' '
+            if to_join[i+1][0] == ')':
+                to_join[i] = to_join[i][:-1]
+
+        return ''.join(to_join)
 
     def words_from_current_pos(self, words, current_pos):
         if not words:
