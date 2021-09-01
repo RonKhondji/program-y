@@ -32,7 +32,7 @@ class Tokenizer:
         if not words:
             return ''
         to_join = [word.strip() for word in words if word]
-        NSC = ['.', ',', '!', '?', '-']
+        NSC = ['.', ',', '!', '/', '?', '-']
         SAC = ['.', ',', '!', '?']
         for i in range(len(to_join)-1):
             if to_join[i][-1] != '(' and to_join[i][-1] not in NSC and to_join[i+1][0] not in NSC:
